@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 新增：Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    {% block scripts %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <!-- 如有自定义样式 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 新增：Swiper 样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='img/logo.png') }}"
+                 alt="海慧供应链"
+                 style="height:40px;">
+            <span class="visually-hidden">海慧供应链</span>
+          </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNav" aria-controls="navbarNav"
+              aria-expanded="false" aria-label="切换导航">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#intro">公司简介</a></li>
+          <li class="nav-item"><a class="nav-link" href="#products">产品列表</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主体内容 -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-light py-3 mt-5">
+    <div class="container">
+      <p class="mb-0 text-center small">
+        安徽海慧供应链科技有限公司 |
+        地点：{{ footer.address }} |
+        邮编：{{ footer.postcode }} |
+        电话：{{ footer.tel }} |
+        手机：{{ footer.mobile }} |
+        邮箱：{{ footer.email }} |
+        {{ footer.copyright }}
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- 如有自定义脚本 -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

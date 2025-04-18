@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Bootstrap Carousel -->
+<!-- templates/index.html -->
+<!-- Swiper 轮播图 -->
+<style>
+  .swiper-container,
+  .swiper-wrapper,
+  .swiper-slide {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+</style>
+<div class="swiper-container mb-5">
+  <div class="swiper-wrapper">
+    {% for img in carousel_images %}
+    <div class="swiper-slide">
+      <img src="{{ url_for('static', filename=img) }}"
+           class="d-block w-100"
+           style="height:800px; object-fit:cover;"
+           alt="Slide {{ loop.index }}">
+    </div>
+    {% endfor %}
+  </div>
+  <!-- 分页器（小点） -->
+  <div class="swiper-pagination"></div>
+  <!-- 导航按钮 -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+<!-- 公司简介 -->
+<section id="intro" class="py-5">
+  <div class="container">
+    <h2 class="mb-4 text-center">公司简介</h2>
+    <p class="lead text-center">{{ company_intro }}</p>
+  </div>
+</section>
+
+<!-- 产品列表 -->
+<section id="products" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="mb-4 text-center">产品列表</h2>
+    <div class="row g-4">
+      {% for p in products %}
+      <div class="col-md-4">
+        <div class="card h-100">
+            <img src="{{ url_for('static', filename=p.image) }}" class="card-img-top" alt="{{ p.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ p.name }}</h5>
+            <p class="card-text">{{ p.desc }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  new Swiper('.swiper-container', {
+    loop: true,
+    speed: 600,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    grabCursor: true,
+    simulateTouch: true,
+    touchReleaseOnEdges: true,
+    resistanceRatio: 0.5,
+    preloadImages: true,
+    updateOnImagesReady: true,
+    observer: true,
+    observeParents: true
+  });
+});
+</script>
+{% endblock %}
+{% endblock %}
